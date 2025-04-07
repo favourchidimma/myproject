@@ -4,7 +4,7 @@ import { motion } from "framer-motion";
 
 export default function Hero() {
   return (
-    <section className="relative h-screen flex items-center justify-center text-white">
+    <section className="relative h-screen flex items-center justify-center text-white bg-[url('/backgroundvideo.gif')] bg-cover bg-center h-80vh">
       <div className="relative z-10 text-center">
         <motion.h1
           initial={{ opacity: 0, y: 50 }}
