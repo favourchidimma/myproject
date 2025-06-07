@@ -6,8 +6,11 @@ const events = [
   { src: '/djimage.jpg', alt: 'DJ Event', date: '2025-03-15' },
   { src: '/comdeyimg.jpg', alt: 'Comedy Show', date: '2025-04-25' },
   { src: '/movienight.jpg', alt: 'Movienight', date: '2025-04-10' },
-  { src: '/Karoke.jpg', alt: 'Karoke', date: '2025-05-28' },
-  { src: '/games.jpg', alt: 'Games', date: '2025-04-28' },
+  { src: '/Karaoke.jpg', alt: 'Karaoke', date: '2025-05-28' },
+  { src: '/games.jpg', alt: 'Games', date: '2025-09-28' },
+  { src: '/Tetradrum.jpg', alt: 'Tetra Drum Show', date: '2025-08-28' },
+  { src: '/groove.jpg', alt: 'Groove Night SHOW', date: '2025-07-28' },
+  { src: '/dancefloor.jpg', alt: 'Dance Floor', date: '2025-06-28' },
 ];
 
 const Upcomingevent = () => {
@@ -74,7 +77,7 @@ const Upcomingevent = () => {
     />
     <button 
       type="submit" 
-      className="bg-red-600 text-white px-5 py-2 rounded-lg mt-3 sm:mt-0 sm:ml-3 hover:bg-red-700 transition cursor-pointer"
+      className="bg-purple-600 text-white px-5 py-2 rounded-lg mt-3 sm:mt-0 sm:ml-3 hover:bg-purple-700 transition cursor-pointer"
     >
       Subscribe
     </button>
