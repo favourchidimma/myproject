@@ -36,31 +36,32 @@ const About = () => {
 
   return (
     <div className="bg-black text-white overflow-x-hidden">
-      <div className="max-w-7xl mx-auto px-6 py-32">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 py-24 sm:py-32">
+  
         <div className="text-center">
-          <h1 className="text-5xl md:text-7xl font-extrabold tracking-wide leading-tight mb-6">
+          <h1 className="text-3xl sm:text-5xl md:text-7xl font-extrabold tracking-wide leading-tight mb-6">
             About Nightlife
           </h1>
-          <p className="text-lg text-neutral-400">
+          <p className="text-base sm:text-lg text-neutral-400">
             Learn more about our story, values, and what makes Nightlife unique.
           </p>
         </div>
 
         <div
-          className="mt-16 rounded-3xl overflow-hidden h-[400px] md:h-[500px] bg-cover bg-center bg-no-repeat"
+          className="mt-12 sm:mt-16 rounded-3xl overflow-hidden h-60 sm:h-96 md:h-[500px] bg-cover bg-center bg-no-repeat"
           style={{ backgroundImage: "url('/backgroundvideo.gif')" }}
         />
 
-        <div className="mt-24 grid md:grid-cols-2 gap-16">
+        <div className="mt-24 grid md:grid-cols-2 gap-12">
           <div>
-            <h2 className="text-3xl md:text-4xl font-bold leading-tight mb-6">
+            <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold leading-tight mb-6">
               Welcome to NIGHTLIFE,<br />where every beat tells a story
             </h2>
             <p className="text-neutral-300 text-lg italic">
               NIGHTLIFE stands as a testament to the marriage of style and substance.
             </p>
           </div>
-          <div className="text-neutral-400 text-lg space-y-6">
+          <div className="text-neutral-400 text-base sm:text-lg space-y-6">
             <p>
               Born from a passion for music, dance, and creating extraordinary experiences,
               NIGHTLIFE is not just a venue; it's a pulsating heartbeat in the rhythm of the city.
@@ -76,19 +77,21 @@ const About = () => {
             </p>
           </div>
         </div>
-        <div className="mt-32 px-6">
+        <div className="mt-32 px-4 sm:px-6">
           <div className="max-w-7xl mx-auto text-white">
-            <h2 className="text-5xl font-bold mb-6">Our Facilities</h2>
-            <p className="text-neutral-400 text-lg mb-16 text-center">
+            <h2 className="text-3xl sm:text-5xl font-bold mb-6">Our Facilities</h2>
+            <p className="text-neutral-400 text-base sm:text-lg mb-12 sm:mb-16 text-center">
               Discover the spaces designed to elevate your nightlife experience.
             </p>
-            <div className="bg-neutral-900 rounded-3xl p-6 md:p-12 flex flex-col md:flex-row gap-12">
+
+            <div className="bg-neutral-900 rounded-3xl p-6 sm:p-8 md:p-12 flex flex-col md:flex-row gap-12">
+
               <div className="flex flex-col gap-4 w-full md:w-1/3">
                 {facilities.map((facility, index) => (
                   <button
                     key={index}
                     onClick={() => setSelectedFacility(facility)}
-                    className={`text-left px-6 py-3 w-full rounded-full border border-neutral-800 hover:border-white transition-all duration-300 font-semibold 
+                    className={`text-left px-6 py-3 w-full rounded-full border border-neutral-800 hover:border-white transition-all duration-300 font-semibold
                       ${
                         selectedFacility.title === facility.title
                           ? "bg-purple-700 text-black"
@@ -99,52 +102,52 @@ const About = () => {
                   </button>
                 ))}
               </div>
-
               <div className="w-full md:w-2/3 flex flex-col items-center justify-center">
                 <Image
                   src={selectedFacility.image}
                   alt={selectedFacility.title}
                   width={600}
                   height={350}
-                  className="rounded-2xl object-cover mb-6"
+                  className="w-full max-w-md rounded-2xl object-cover mb-6"
                 />
-                <p className="text-center text-lg text-neutral-300 max-w-xl">
+                <p className="text-center text-base sm:text-lg text-neutral-300 max-w-xl">
                   {selectedFacility.description}
                 </p>
               </div>
             </div>
           </div>
         </div>
-        <div className="mt-32 rounded-2xl items-center bg-gradient-to-br from-black via-neutral-900 to-black px-6 py-24">
+
+        <div className="mt-32 rounded-2xl items-center bg-gradient-to-br from-black via-neutral-900 to-black px-6 py-20 sm:py-24">
           <div className="max-w-4xl mx-auto text-center text-white">
-            <h2 className="text-4xl md:text-5xl font-extrabold mb-6 leading-tight">
+            <h2 className="text-3xl sm:text-4xl md:text-5xl font-extrabold mb-6 leading-tight">
               Let the night belong to you
             </h2>
-            <p className="text-neutral-400 text-lg mb-10">
+            <p className="text-neutral-400 text-base sm:text-lg mb-10">
               Where the music is alive, the atmosphere is electric, and every night is a celebration waiting to unfold.
             </p>
-            <div className="flex flex-col sm:flex-row justify-center gap-6">
+            <div className="flex flex-col sm:flex-row justify-center gap-4 sm:gap-6">
               <a
                 href="/events"
-                className="border border-white text-white px-8 py-4 rounded-2xl font-semibold text-lg hover:bg-white hover:text-black transition-all duration-300"
+                className="border border-white text-white px-8 py-3 sm:py-4 rounded-2xl font-semibold text-base sm:text-lg hover:bg-white hover:text-black transition-all duration-300"
               >
                 Events
               </a>
               <a
                 href="/reservations"
-                className="border border-white text-white px-8 py-4 rounded-2xl font-semibold text-lg hover:bg-white hover:text-black transition-all duration-300"
+                className="border border-white text-white px-8 py-3 sm:py-4 rounded-2xl font-semibold text-base sm:text-lg hover:bg-white hover:text-black transition-all duration-300"
               >
                 Reservations
               </a>
             </div>
           </div>
         </div>
-        <section className="my-10 border border-white bg-black text-white rounded-2xl py-32 px-6">
+
+        <section className="my-20 border border-white bg-black text-white rounded-2xl py-24 px-4 sm:px-6">
           <div className="max-w-5xl mx-auto">
-            <h1 className="text-5xl md:text-6xl font-bold text-left mb-20">
+            <h1 className="text-3xl sm:text-5xl md:text-6xl font-bold text-left mb-12 sm:mb-20">
               The Club Rules
             </h1>
-
             <ul className="space-y-8">
               {[
                 {
@@ -201,40 +204,57 @@ const About = () => {
                 <li key={index} className="flex items-start gap-4">
                   <SiListmonk className="bg-purple-700 text-white rounded-full p-2 text-3xl shrink-0" />
                   <div>
-                    <h2 className="text-2xl font-semibold text-white mb-1">
+                    <h2 className="text-xl sm:text-2xl font-semibold text-white mb-1">
                       {rule.title}
                     </h2>
-                    <p className="text-neutral-300">{rule.description}</p>
+                    <p className="text-neutral-300 text-base sm:text-lg">
+                      {rule.description}
+                    </p>
                   </div>
                 </li>
               ))}
             </ul>
           </div>
         </section>
-
-  
-      <div 
-  className="relative bg-cover bg-center w-auto h-60 mt-20 flex flex-col justify-center items-center text-center px-6"
-  style={{ backgroundImage: "url('/image3.jpg')" }}
+        <div 
+          className="relative bg-cover bg-center w-auto h-60 mt-20 flex flex-col justify-center items-center text-center px-4 sm:px-6"
+          style={{ backgroundImage: "url('/image3.jpg')" }}
+        >
+          <p className="text-white font-bold text-2xl sm:text-3xl md:text-5xl max-w-xl">
+            Never miss a show of your favorite artist
+          </p>
+          <form
+  action="https://formsubmit.co/fave12fave@gmail.com"
+  method="POST"
+  className="bg-white text-red-900 w-full max-w-lg flex flex-col sm:flex-row items-center mt-6 p-3 rounded-2xl shadow-lg gap-3 sm:gap-0"
 >
-  <p className="text-white font-bold text-3xl md:text-5xl">
-    Never miss a show of your favorite artist
-  </p>
-  <form className="bg-white text-red-900 w-full max-w-lg flex flex-col sm:flex-row items-center mt-6 p-3 rounded-2xl shadow-lg">
-    <input 
-      type="text" 
-      placeholder="Email or Phone Number" 
-      className="flex-1 px-4 py-2 border-none outline-none text-gray-700 w-full sm:w-auto"
-    />
-    <button 
-      type="submit" 
-      className="bg-purple-600 text-white px-5 py-2 rounded-lg mt-3 sm:mt-0 sm:ml-3 hover:bg-purple-700 transition cursor-pointer"
-    >
-      Subscribe
-    </button>
-  </form>
-</div>
-    </div>
+  <input
+    type="email"
+    name="email"
+    placeholder="Email Address"
+    required
+    className="flex-1 px-4 py-2 border-none outline-none text-gray-700 w-full"
+  />
+
+  {/* Hidden fields for extra config */}
+  <input type="hidden" name="_captcha" value="false" />
+  <input type="hidden" name="_subject" value="New Newsletter Subscriber!" />
+  <input
+    type="hidden"
+    name="_next"
+    value="https://yourdomain.com/thank-you"
+  />
+
+  <button
+    type="submit"
+    className="bg-purple-600 text-white px-5 py-2 rounded-lg w-full sm:w-auto hover:bg-purple-700 transition cursor-pointer"
+  >
+    Subscribe
+  </button>
+</form>
+
+        </div>
+      </div>
     </div>
   );
 };

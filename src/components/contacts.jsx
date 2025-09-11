@@ -34,7 +34,6 @@ export default function ContactPage() {
     setLoading(true);
 
     try {
-      // Simulate API call delay
       await new Promise((res) => setTimeout(res, 1500));
       setFinish(true);
     } catch (err) {
@@ -45,28 +44,23 @@ export default function ContactPage() {
   };
 
   return (
-    <section className="w-full min-h-screen bg-[#0a0a0a] text-white flex flex-col lg:flex-row items-start justify-center py-20 px-6 lg:px-24 gap-20">
-      {/* Contact Info */}
-      <div className="">
-        <h1 className="text-6xl font-extrabold">GET IN TOUCH</h1>
-        <p className="text-xl mb-10 leading-relaxed text-neutral-500 ">
-          Have any questions or suggestions? We'd love to hear from you! Give us a call or leave your message via the contact form below.
+    <section className="w-full min-h-screen bg-black text-white flex flex-col lg:flex-row items-start justify-center py-20 px-6 lg:px-24 gap-20">
+      <div className="max-w-lg space-y-6">
+        <h1 className="text-5xl font-extrabold">Get in Touch</h1>
+        <p className="text-lg text-neutral-400 leading-relaxed">
+          Have any questions or suggestions? We’d love to hear from you. Call us or drop a message using the form.
         </p>
 
-        <div className="space-y-6 text-lg">
-          {/* <ContactDetail icon={<Mail className="text-black" />} title="Email Address" content="events@ballazz.co" /> */}
+        <div className="space-y-4 text-base">
           <ContactDetail icon={<Phone className="text-black" />} title="Call Us" content="+91 9112211492" />
-          {/* <ContactDetail icon={<MapPin className="text-black" />} title="Address" content="Konibaje - 234 Rd, 234, +234" /> */}
         </div>
       </div>
-
-      {/* Contact Form */}
       <motion.div
         initial={{ opacity: 0, y: 30 }}
         whileInView={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.6 }}
         viewport={{ once: true }}
-        className="bg-[#1a0f20] p-10 rounded-xl w-full max-w-xl"
+        className="bg-[#1a0f20] p-10 rounded-2xl w-full max-w-xl shadow-lg"
       >
         {finish ? (
           <motion.div
@@ -78,83 +72,62 @@ export default function ContactPage() {
           </motion.div>
         ) : (
           <form onSubmit={handleSubmit} className="space-y-6" noValidate>
-            <div className="flex gap-4">
-              <div className="w-1/2">
-                <label htmlFor="firstName" className="sr-only">First Name</label>
-                <input
-                  id="firstName"
-                  name="firstName"
-                  type="text"
-                  value={formInfo.firstName}
-                  onChange={handleChange}
-                  placeholder="First Name*"
-                  className="w-full p-4 rounded-lg bg-white placeholder-neutral-600 text-gray-900 focus:outline-none"
-                  required
-                />
-              </div>
-              <div className="w-1/2">
-                <label htmlFor="lastName" className="sr-only">Last Name</label>
-                <input
-                  id="lastName"
-                  name="lastName"
-                  type="text"
-                  value={formInfo.lastName}
-                  onChange={handleChange}
-                  placeholder="Last Name"
-                  className="w-full p-4 rounded-lg bg-white placeholder-neutral-600 text-gray-900 focus:outline-none"
-                />
-              </div>
-            </div>
-
-            <div className="flex gap-4">
-              <div className="w-1/2">
-                <label htmlFor="email" className="sr-only">Email</label>
-                <input
-                  id="email"
-                  name="email"
-                  type="email"
-                  value={formInfo.email}
-                  onChange={handleChange}
-                  placeholder="Email*"
-                  className="w-full p-4 rounded-lg bg-white placeholder-neutral-600 text-gray-900 focus:outline-none"
-                  required
-                />
-              </div>
-              <div className="w-1/2">
-                <label htmlFor="phone" className="sr-only">Phone</label>
-                <input
-                  id="phone"
-                  name="phone"
-                  type="tel"
-                  value={formInfo.phone}
-                  onChange={handleChange}
-                  placeholder="Phone Number"
-                  className="w-full p-4 rounded-lg bg-white placeholder-neutral-600 text-gray-900 focus:outline-none"
-                />
-              </div>
-            </div>
-
-            <div>
-              <label htmlFor="message" className="sr-only">Message</label>
-              <textarea
-                id="message"
-                name="message"
-                value={formInfo.message}
+            <div className="flex flex-col sm:flex-row gap-4">
+              <input
+                name="firstName"
+                type="text"
+                placeholder="First Name*"
+                value={formInfo.firstName}
                 onChange={handleChange}
-                placeholder="Your Message*"
-                className="w-full h-40 p-4 rounded-lg bg-white placeholder-neutral-600 text-gray-900 resize-none focus:outline-none"
+                className="flex-1 p-4 rounded-lg bg-white placeholder-neutral-600 text-gray-900 focus:outline-none"
                 required
+              />
+              <input
+                name="lastName"
+                type="text"
+                placeholder="Last Name"
+                value={formInfo.lastName}
+                onChange={handleChange}
+                className="flex-1 p-4 rounded-lg bg-white placeholder-neutral-600 text-gray-900 focus:outline-none"
+              />
+            </div>
+            <div className="flex flex-col sm:flex-row gap-4">
+              <input
+                name="email"
+                type="email"
+                placeholder="Email*"
+                value={formInfo.email}
+                onChange={handleChange}
+                className="flex-1 p-4 rounded-lg bg-white placeholder-neutral-600 text-gray-900 focus:outline-none"
+                required
+              />
+              <input
+                name="phone"
+                type="tel"
+                placeholder="Phone Number"
+                value={formInfo.phone}
+                onChange={handleChange}
+                className="flex-1 p-4 rounded-lg bg-white placeholder-neutral-600 text-gray-900 focus:outline-none"
               />
             </div>
 
+            {/* Message */}
+            <textarea
+              name="message"
+              placeholder="Your Message*"
+              value={formInfo.message}
+              onChange={handleChange}
+              className="w-full h-40 p-4 rounded-lg bg-white placeholder-neutral-600 text-gray-900 resize-none focus:outline-none"
+              required
+            />
             <button
               type="submit"
               disabled={loading}
-              className={`w-full p-4 bg-white hover:bg-[#7d2e89] transition-colors rounded-lg text-gray-900 font-bold uppercase ${
+              className={`w-full p-4 bg-purple-600 text-white rounded-lg font-bold uppercase tracking-wide hover:bg-purple-700 transition ${
                 loading ? 'opacity-70 cursor-not-allowed' : ''
               }`}
             >
-              {loading ? 'Sending...' : 'Reserve Now'}
+              {loading ? 'Sending...' : 'Send Message'}
             </button>
           </form>
         )}
@@ -170,7 +143,7 @@ const ContactDetail = ({ icon, title, content }) => (
       {icon}
     </div>
     <div>
-      <p className="text-sm uppercase text-gray-900">{title}</p>
+      <p className="text-sm uppercase text-gray-900 font-semibold">{title}</p>
       <p>{content}</p>
     </div>
   </div>

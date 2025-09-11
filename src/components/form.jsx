@@ -14,11 +14,6 @@ export function Form() {
       return false;
     }
   
-    // const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    // if (!emailRegex.test(email)) {
-    //   alert("Please enter a valid email address.");
-    //   return false;
-    // }
   
     const phoneRegex = /^[0-9\s+()-]+$/;
     if (!phoneRegex.test(phone)) {
@@ -83,7 +78,6 @@ export function Form() {
   return (
     <>
       <div className="flex items-center justify-center gap-50">
-        {/* Contact Info Section */}
         <div className="flex flex-col items-start justify-start gap-7 px-4">
           <div className="flex items-center justify-start text-start gap-2">
             <hr className="w-[30%] border-t-3 border-yellow-700" />
@@ -95,8 +89,6 @@ export function Form() {
           <p className="text-3xl font-bold w-[400px] text-start leading-12">
             Hit us up and Let’s get cracking!
           </p>
-
-          {/* Email Info */}
           <div className="flex gap-4">
             <div className="clip-triangle w-[60px] h-[50px] bg-yellow-700 flex items-center justify-center py-4">
               <Mail className="pt-1 hover:text-black" />
@@ -106,8 +98,6 @@ export function Form() {
               <p>events@ballazz.co</p>
             </div>
           </div>
-
-          {/* Phone Info */}
           <div className="flex gap-4">
             <div className="clip-triangle w-[60px] h-[50px] bg-yellow-700 flex items-center justify-center py-4">
               <Phone className="pt-1 hover:text-black" />
@@ -117,8 +107,6 @@ export function Form() {
               <p>+91 9112211492</p>
             </div>
           </div>
-
-          {/* Address Info */}
           <div className="flex gap-4">
             <div className="clip-triangle w-[60px] h-[50px] bg-yellow-700 flex items-center justify-center py-4">
               <MapPin className="pt-1 hover:text-black" />
@@ -129,8 +117,6 @@ export function Form() {
             </div>
           </div>
         </div>
-
-        {/* Form Section */}
         <div className="flex flex-row items-center justify-center w-[680px] h-[80vh] bg-[#1a0f20]">
           {finish ? (
             <div className="text-white text-2xl font-semibold">
