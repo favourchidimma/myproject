@@ -1,9 +1,8 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
-import PaystackPop from "@paystack/inline-js";
-import { useCartState } from "@/context/CartContext"; 
+import { useCartState } from "@/context/CartContext";
 
 export default function PaymentPage() {
   const { cart, total, clearCart } = useCartState(); 
@@ -15,6 +14,15 @@ export default function PaymentPage() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
 
+  const [PaystackPop, setPaystackPop] = useState(null);
+
+  // Dynamically import Paystack only in the browser
+  useEffect(() => {
+    import("@paystack/inline-js").then((mod) => {
+      setPaystackPop(() => mod.default);
+    });
+  }, []);
+
   const handlePay = () => {
     if (!email || !name || !phone) {
       setError("Please enter name, email and phone.");
@@ -22,6 +30,11 @@ export default function PaymentPage() {
     }
     if (cart.length === 0) {
       setError("Your cart is empty.");
+      return;
+    }
+
+    if (!PaystackPop) {
+      setError("Payment system not ready. Please try again.");
       return;
     }
 
@@ -95,8 +108,8 @@ export default function PaymentPage() {
 
         <button
           onClick={handlePay}
-          disabled={loading}
-          className="w-full py-3 rounded-xl bg-gradient-to-r from-purple-600 to-blue-500 font-semibold"
+          disabled={loading || !PaystackPop}
+          className="w-full py-3 rounded-xl bg-gradient-to-r from-purple-600 to-blue-500 font-semibold disabled:opacity-50"
         >
           {loading ? "Processing..." : `Pay ₦${total.toLocaleString()}`}
         </button>
