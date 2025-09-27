@@ -3,14 +3,13 @@ import React, { useState } from "react";
 import Link from "next/link";
 import { FiMenu, FiX } from "react-icons/fi";
 import { ShoppingCart } from "lucide-react";
+import { Sparkles } from "lucide-react"; // small icon for logo accent
 import { useCartState } from "../context/CartContext";
-
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
-const { cart } = useCartState();
+  const { cart } = useCartState();
 
-  
   const cartCount = cart.reduce(
     (total, item) => total + (item.quantity || 1),
     0
@@ -27,15 +26,20 @@ const { cart } = useCartState();
   return (
     <nav className="fixed top-0 left-0 w-full bg-black/60 backdrop-blur-md text-white z-50 shadow-md">
       <div className="container mx-auto flex items-center justify-between px-6 py-4">
-       
+        {/* LOGO */}
         <Link
-          href="/Nightlife"
-          className="text-3xl font-extrabold tracking-wide bg-gradient-to-r from-purple-500 to-pink-500 text-transparent bg-clip-text"
+          href="/"
+          className="flex items-center gap-2"
         >
-          Nightlife
+          <div className="flex items-center gap-2">
+            <Sparkles className="w-8 h-8 text-pink-500" />
+            <span className="text-3xl font-extrabold uppercase tracking-widest bg-gradient-to-r from-purple-500 to-pink-500 text-transparent bg-clip-text drop-shadow-lg">
+              Nightlife
+            </span>
+          </div>
         </Link>
 
-        
+        {/* Mobile Menu Button */}
         <button
           onClick={() => setIsOpen(!isOpen)}
           className="md:hidden text-white text-3xl"
@@ -43,7 +47,7 @@ const { cart } = useCartState();
           {isOpen ? <FiX /> : <FiMenu />}
         </button>
 
-      
+        {/* Desktop Nav Links */}
         <ul className="hidden md:flex space-x-10 text-lg items-center">
           {navLinks.map((item) => (
             <li key={item.name} className="relative group">
@@ -57,7 +61,7 @@ const { cart } = useCartState();
             </li>
           ))}
 
-          
+          {/* Cart */}
           <li className="relative">
             <Link
               href="/cart"
@@ -74,7 +78,7 @@ const { cart } = useCartState();
         </ul>
       </div>
 
-      
+      {/* Mobile Menu */}
       {isOpen && (
         <div className="md:hidden absolute top-[72px] left-0 w-full bg-black/90 backdrop-blur-md border-t border-white/10">
           <ul className="flex flex-col items-center space-y-6 py-6 text-lg">
@@ -89,7 +93,7 @@ const { cart } = useCartState();
                 </Link>
               </li>
             ))}
-           
+
             <li className="relative">
               <Link
                 href="/cart"

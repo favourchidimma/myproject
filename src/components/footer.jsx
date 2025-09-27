@@ -22,11 +22,7 @@ const Footer = () => {
                 🎉 Events
               </Link>
             </li>
-            <li>
-              <Link href="/shop" className="hover:underline">
-                🛒 Shop
-              </Link>
-            </li>
+            
             <li>
               <Link href="/reservations" className="hover:underline">
                 🍽 Reservations
