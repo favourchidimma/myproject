@@ -10,7 +10,7 @@ import { notFound } from "next/navigation";
 import { useCart } from "@/context/CartContext";
 import { useRouter } from "next/navigation";
 
-// All events with details and Naira pricing
+
 const EVENTS = [
   {
     id: "1",
