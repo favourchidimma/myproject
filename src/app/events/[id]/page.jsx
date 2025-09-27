@@ -2,10 +2,10 @@
 "use client";
 import React, { useState } from "react";
 import Image from "next/image";
-import TicketSelector from "./TicketSelector.client";
-import TableSelector from "./TableSelector.client";
+import TicketSelector from "./TicketSelector.client.jsx";
+import TableSelector from "./TableSelector.client.jsx";
 import Gallery from "./Gallery.client.jsx";
-import MoreEvents from "./MoreEvents.client";
+import MoreEvents from "./MoreEvents.client.jsx";
 import { notFound } from "next/navigation";
 import { useCart } from "@/context/CartContext";
 import { useRouter } from "next/navigation";
