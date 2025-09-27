@@ -4,7 +4,7 @@ import React, { useState } from "react";
 import Image from "next/image";
 import TicketSelector from "./TicketSelector.client";
 import TableSelector from "./TableSelector.client";
-import Gallery from "./gallery.client.jsx";
+import Gallery from "./Gallery.client.jsx";
 import MoreEvents from "./MoreEvents.client";
 import { notFound } from "next/navigation";
 import { useCart } from "@/context/CartContext";
