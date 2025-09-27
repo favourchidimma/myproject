@@ -3,13 +3,14 @@ import React, { useState } from "react";
 import Link from "next/link";
 import { FiMenu, FiX } from "react-icons/fi";
 import { ShoppingCart } from "lucide-react";
-import { useCart } from "../context/CartContext";
+import { useCartState } from "../context/CartContext";
+
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
-  const { cart } = useCart(); // get cart from context
+const { cart } = useCartState();
 
-  // calculate total items (sum of quantities if quantity exists)
+  
   const cartCount = cart.reduce(
     (total, item) => total + (item.quantity || 1),
     0
@@ -26,7 +27,7 @@ const Navbar = () => {
   return (
     <nav className="fixed top-0 left-0 w-full bg-black/60 backdrop-blur-md text-white z-50 shadow-md">
       <div className="container mx-auto flex items-center justify-between px-6 py-4">
-        {/* Logo */}
+       
         <Link
           href="/Nightlife"
           className="text-3xl font-extrabold tracking-wide bg-gradient-to-r from-purple-500 to-pink-500 text-transparent bg-clip-text"
@@ -34,7 +35,7 @@ const Navbar = () => {
           Nightlife
         </Link>
 
-        {/* Mobile Toggle */}
+        
         <button
           onClick={() => setIsOpen(!isOpen)}
           className="md:hidden text-white text-3xl"
@@ -42,7 +43,7 @@ const Navbar = () => {
           {isOpen ? <FiX /> : <FiMenu />}
         </button>
 
-        {/* Desktop Menu */}
+      
         <ul className="hidden md:flex space-x-10 text-lg items-center">
           {navLinks.map((item) => (
             <li key={item.name} className="relative group">
@@ -56,7 +57,7 @@ const Navbar = () => {
             </li>
           ))}
 
-          {/* Cart */}
+          
           <li className="relative">
             <Link
               href="/cart"
@@ -73,7 +74,7 @@ const Navbar = () => {
         </ul>
       </div>
 
-      {/* Mobile Dropdown */}
+      
       {isOpen && (
         <div className="md:hidden absolute top-[72px] left-0 w-full bg-black/90 backdrop-blur-md border-t border-white/10">
           <ul className="flex flex-col items-center space-y-6 py-6 text-lg">
@@ -88,7 +89,7 @@ const Navbar = () => {
                 </Link>
               </li>
             ))}
-            {/* Cart for mobile */}
+           
             <li className="relative">
               <Link
                 href="/cart"

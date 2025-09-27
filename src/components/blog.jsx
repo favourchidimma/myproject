@@ -3,6 +3,7 @@
 import Image from "next/image";
 import { motion } from "framer-motion";
 import Link from "next/link";
+import Form from "./form";
 
 const blogPosts = [
   {
@@ -57,9 +58,10 @@ const blogPosts = [
 export default function BlogPage() {
   return (
     <div className="bg-black text-white min-h-screen">
-      {/* Hero Section */}
+     
       <motion.div
-        className="text-white  relative bg-[url('/blogimage.jpg')] overflow-hidden bg-center bg-cover bg-no-repeat"
+       className="relative h-screen flex items-center inset-0  bg-opacity-40 justify-center text-white bg-cover bg-center"
+        style={{ backgroundImage: "url('/club-bg.jpg')" }}        
         initial={{ opacity: 0, y: 20 }}
         whileInView={{ opacity: 1, y: 0 }}
         whileHover={{ scale: 1.03 }}
@@ -81,11 +83,17 @@ export default function BlogPage() {
         </motion.div>
       </motion.div>
 
-      {/* Featured Section */}
+     
       <div className="max-w-4xl mx-auto px-4 py-12 text-center space-y-4">
-        <button className="bg-purple-600 text-white px-4 py-1 rounded-full text-xs font-semibold tracking-wider">
-          FEATURED
-        </button>
+       <button
+  onClick={() =>
+    document.getElementById("featured-posts")?.scrollIntoView({ behavior: "smooth" })
+  }
+  className="bg-purple-600 text-white px-4 py-1 rounded-full text-xs font-semibold tracking-wider"
+>
+  FEATURED
+</button>
+
         <p className="text-xl sm:text-2xl font-semibold">
           Unveiling the Nitelclub Experience – A Nightclub Redefined!
         </p>
@@ -97,8 +105,12 @@ export default function BlogPage() {
         </p>
       </div>
 
-      {/* Blog Cards */}
-      <div className="max-w-7xl mx-auto px-4 pb-20 grid gap-10 md:grid-cols-3">
+   
+            <div
+        id="featured-posts"
+        className="max-w-7xl mx-auto px-4 pb-20 grid gap-10 md:grid-cols-3"
+      >
+
         {blogPosts.map((post) => (
           <motion.div
             key={post.id}
@@ -145,52 +157,7 @@ export default function BlogPage() {
           </motion.div>
         ))}
       </div>
-
-      {/* Subscribe Section */}
-      <div
-        className="relative bg-cover bg-center w-full h-80 sm:h-96 mt-20 flex flex-col justify-center items-center text-center px-6"
-        style={{ backgroundImage: "url('/beatsnoop.jpg')" }}
-      >
-        <div className="justify-center items-center bg-opacity-70 w-full h-full absolute top-0 left-0 z-0" />
-        <div className="relative z-10 max-w-2xl mx-auto">
-          <p className="text-white font-bold text-2xl sm:text-3xl md:text-5xl">
-            Never miss a show of your favorite artist
-          </p>
-          <form
-  action="https://formsubmit.co/YOUR_EMAIL_HERE"
-  method="POST"
-  className="bg-white text-red-900 w-full max-w-lg flex flex-col sm:flex-row items-center mt-6 p-3 rounded-2xl shadow-lg gap-3 sm:gap-0"
->
-  <input
-    type="email"
-    name="email"
-    placeholder="Your Email"
-    required
-    className="flex-1 px-4 py-2 border-none outline-none text-gray-700 w-full"
-  />
-
-  {/* Hidden fields for config */}
-  <input type="hidden" name="_captcha" value="false" />
-  <input type="hidden" name="_subject" value="New Blog Subscriber!" />
-  <input
-    type="hidden"
-    name="_next"
-    value="https://yourdomain.com/thank-you"
-  />
-
-  <button
-    type="submit"
-    className="bg-purple-600 text-white px-5 py-2 cursor-pointer rounded-lg w-full sm:w-auto hover:bg-purple-700 transition"
-  >
-    Subscribe
-  </button>
-</form>
-
-          <p className="text-white text-sm mt-4">
-            Get notifications delivered to your email weekly
-          </p>
-        </div>
-      </div>
+      <Form />
     </div>
   );
 }

@@ -1,150 +1,216 @@
-'use client';
+"use client";
 
-import { useState } from 'react';
-import { Mail, Phone, MapPin } from 'lucide-react';
-import { Toaster, toast } from 'react-hot-toast';
-import { motion } from 'framer-motion';
+import React, { useState } from "react";
+import { Mail, MapPin, Phone, CheckCircle } from "lucide-react";
+import { Toaster, toast } from "react-hot-toast";
+import EmbeddedMap from "@/components/embeddedmap";
 
-export default function ContactPage() {
+export default function ContactForm() {
   const [formInfo, setFormInfo] = useState({
-    firstName: '',
-    lastName: '',
-    email: '',
-    phone: '',
-    message: '',
+    firstName: "",
+    lastName: "",
+    email: "",
+    phone: "",
+    message: "",
   });
 
-  const [loading, setLoading] = useState(false);
-  const [finish, setFinish] = useState(false);
+  const [submitted, setSubmitted] = useState(false);
+
+  const validation = () => {
+    const { firstName, lastName, email, phone, message } = formInfo;
+
+    if (
+      !firstName.trim() ||
+      !lastName.trim() ||
+      !email.trim() ||
+      !phone.trim() ||
+      !message.trim()
+    ) {
+      toast.error("All fields are required.");
+      return false;
+    }
+
+    const phoneRegex = /^[0-9\s+()-]+$/;
+    if (!phoneRegex.test(phone)) {
+      toast.error("Enter a valid phone number.");
+      return false;
+    }
+
+    return true;
+  };
 
   const handleChange = (e) => {
-    setFormInfo({ ...formInfo, [e.target.name]: e.target.value });
+    const { name, value } = e.target;
+    setFormInfo((prev) => ({ ...prev, [name]: value }));
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    const { firstName, email, message } = formInfo;
-
-    if (!firstName || !email || !message) {
-      toast.error('Please fill in all required fields');
-      return;
-    }
-
-    setLoading(true);
+    if (!validation()) return;
 
     try {
-      await new Promise((res) => setTimeout(res, 1500));
-      setFinish(true);
+      const response = await fetch("https://formsubmit.co/ajax/idikafavourchidimma1@gmail.com", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json",
+        },
+        body: JSON.stringify(formInfo),
+      });
+
+      if (response.ok) {
+        setSubmitted(true);
+
+       
+        setFormInfo({
+          firstName: "",
+          lastName: "",
+          email: "",
+          phone: "",
+          message: "",
+        });
+
+        toast.success("Message sent successfully!");
+
+        setTimeout(() => {
+          setSubmitted(false);
+        }, 5000);
+      } else {
+        toast.error("Something went wrong.");
+      }
     } catch (err) {
-      toast.error('Something went wrong. Please try again.');
-    } finally {
-      setLoading(false);
+      console.error("Submission error:", err);
+      toast.error("Failed to submit the form.");
     }
   };
 
   return (
-    <section className="w-full min-h-screen bg-black text-white flex flex-col lg:flex-row items-start justify-center py-20 px-6 lg:px-24 gap-20">
-      <div className="max-w-lg space-y-6">
-        <h1 className="text-5xl font-extrabold">Get in Touch</h1>
-        <p className="text-lg text-neutral-400 leading-relaxed">
-          Have any questions or suggestions? We’d love to hear from you. Call us or drop a message using the form.
-        </p>
+    <div className="w-full bg-[#0d0d0d] text-white py-20 px-6">
+      <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-start gap-10">
+        
+       
+        <div className="flex flex-col items-start gap-7 w-full md:w-1/3">
+          <div className="flex items-center gap-2">
+            <hr className="w-[30%] border-t-4 border-yellow-600" />
+            <h2 className="text-2xl font-bold">Contact Us</h2>
+          </div>
 
-        <div className="space-y-4 text-base">
-          <ContactDetail icon={<Phone className="text-black" />} title="Call Us" content="+91 9112211492" />
+          <p className="text-3xl font-bold w-[400px] leading-12">
+            Hit us up and Let’s get cracking!
+          </p>
+
+          <div className="flex gap-4">
+            <div className="w-[60px] h-[50px] bg-yellow-600 flex items-center justify-center rounded-md">
+              <Mail className="text-black" />
+            </div>
+            <div className="flex-col text-start">
+              <p className="pb-0.5">Email Address</p>
+              <p>events@ballazz.co</p>
+            </div>
+          </div>
+
+          
+          <div className="flex gap-4">
+            <div className="w-[60px] h-[50px] bg-yellow-600 flex items-center justify-center rounded-md">
+              <Phone className="text-black" />
+            </div>
+            <div className="flex-col text-start">
+              <p className="pb-0.5">Call Us</p>
+              <p>+91 9112211492</p>
+            </div>
+          </div>
+
+          <div className="flex gap-4">
+            <div className="w-[60px] h-[50px] bg-yellow-600 flex items-center justify-center rounded-md">
+              <MapPin className="text-black" />
+            </div>
+            <div className="flex-col text-start">
+              <p className="pb-0.5">Address</p>
+              <p>Konibaje - 234 Rd, 234, +234</p>
+            </div>
+          </div>
         </div>
-      </div>
-      <motion.div
-        initial={{ opacity: 0, y: 30 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.6 }}
-        viewport={{ once: true }}
-        className="bg-[#1a0f20] p-10 rounded-2xl w-full max-w-xl shadow-lg"
-      >
-        {finish ? (
-          <motion.div
-            className="text-2xl font-semibold text-center text-green-400"
-            initial={{ opacity: 0, scale: 0.8 }}
-            animate={{ opacity: 1, scale: 1 }}
+
+        <div className="flex flex-col items-center justify-center w-full md:w-1/3 bg-[#1a0f20] rounded-2xl shadow-xl p-8">
+          <form
+            onSubmit={handleSubmit}
+            className="flex flex-col items-start justify-start gap-7 w-full"
           >
-            Thank you for your message!
-          </motion.div>
-        ) : (
-          <form onSubmit={handleSubmit} className="space-y-6" noValidate>
-            <div className="flex flex-col sm:flex-row gap-4">
+            <div className="flex items-center justify-center gap-3 w-full">
               <input
-                name="firstName"
+                className="w-1/2 h-[50px] bg-[#402c45] rounded-lg px-4 border-none outline-none text-white placeholder-gray-300"
                 type="text"
-                placeholder="First Name*"
+                name="firstName"
                 value={formInfo.firstName}
                 onChange={handleChange}
-                className="flex-1 p-4 rounded-lg bg-white placeholder-neutral-600 text-gray-900 focus:outline-none"
-                required
+                placeholder="First Name"
               />
               <input
-                name="lastName"
+                className="w-1/2 h-[50px] bg-[#402c45] rounded-lg px-4 border-none outline-none text-white placeholder-gray-300"
                 type="text"
-                placeholder="Last Name"
+                name="lastName"
                 value={formInfo.lastName}
                 onChange={handleChange}
-                className="flex-1 p-4 rounded-lg bg-white placeholder-neutral-600 text-gray-900 focus:outline-none"
+                placeholder="Last Name"
               />
             </div>
-            <div className="flex flex-col sm:flex-row gap-4">
+
+            <div className="flex items-center justify-center gap-3 w-full">
               <input
-                name="email"
+                className="w-1/2 h-[50px] bg-[#402c45] rounded-lg px-4 border-none outline-none text-white placeholder-gray-300"
                 type="email"
-                placeholder="Email*"
+                name="email"
                 value={formInfo.email}
                 onChange={handleChange}
-                className="flex-1 p-4 rounded-lg bg-white placeholder-neutral-600 text-gray-900 focus:outline-none"
-                required
+                placeholder="Email"
               />
               <input
+                className="w-1/2 h-[50px] bg-[#402c45] rounded-lg px-4 border-none outline-none text-white placeholder-gray-300"
+                type="text"
                 name="phone"
-                type="tel"
-                placeholder="Phone Number"
                 value={formInfo.phone}
                 onChange={handleChange}
-                className="flex-1 p-4 rounded-lg bg-white placeholder-neutral-600 text-gray-900 focus:outline-none"
+                placeholder="Phone Number"
               />
             </div>
 
-            {/* Message */}
-            <textarea
-              name="message"
-              placeholder="Your Message*"
-              value={formInfo.message}
-              onChange={handleChange}
-              className="w-full h-40 p-4 rounded-lg bg-white placeholder-neutral-600 text-gray-900 resize-none focus:outline-none"
-              required
-            />
+            <div className="w-full h-[200px] bg-[#402c45] rounded-lg">
+              <textarea
+                className="w-full h-full resize-none border-none outline-none px-4 py-3 bg-transparent text-white placeholder-gray-300"
+                name="message"
+                value={formInfo.message}
+                onChange={handleChange}
+                placeholder="Hit a Message"
+              />
+            </div>
+
             <button
               type="submit"
-              disabled={loading}
-              className={`w-full p-4 bg-purple-600 text-white rounded-lg font-bold uppercase tracking-wide hover:bg-purple-700 transition ${
-                loading ? 'opacity-70 cursor-not-allowed' : ''
-              }`}
+              className="w-full h-[70px] bg-gradient-to-r from-purple-700 to-pink-700 rounded-lg text-white font-semibold text-lg hover:opacity-90 transition"
             >
-              {loading ? 'Sending...' : 'Send Message'}
+              Reserve Now
             </button>
           </form>
-        )}
-        <Toaster />
-      </motion.div>
-    </section>
+
+          
+          {submitted && (
+            <div className="mt-8 w-full p-6 bg-gradient-to-r from-green-600 to-green-800 rounded-xl flex items-center gap-4 text-white animate-fadeIn">
+              <CheckCircle className="w-10 h-10 text-white" />
+              <div>
+                <h3 className="font-bold text-xl">Thank you!</h3>
+                <p>Your message has been received. We'll get back to you soon 🎉</p>
+              </div>
+            </div>
+          )}
+        </div>
+
+        <div className="w-full md:w-1/3 h-[400px]">
+          <EmbeddedMap />
+        </div>
+      </div>
+
+      <Toaster />
+    </div>
   );
 }
-
-const ContactDetail = ({ icon, title, content }) => (
-  <div className="flex items-start gap-4">
-    <div className="bg-yellow-500 clip-triangle w-[50px] h-[45px] flex items-center justify-center">
-      {icon}
-    </div>
-    <div>
-      <p className="text-sm uppercase text-gray-900 font-semibold">{title}</p>
-      <p>{content}</p>
-    </div>
-  </div>
-);

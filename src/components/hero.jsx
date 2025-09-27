@@ -5,7 +5,7 @@ import { motion } from "framer-motion";
 export default function Hero() {
   return (
     <section
-    className="relative h-screen flex items-center justify-center text-white bg-cover bg-center"
+    className="relative h-screen flex items-center inset-0  bg-opacity-40 justify-center text-white bg-cover bg-center"
     style={{ backgroundImage: "url('/backgroundvideo.gif')" }}
     >
 

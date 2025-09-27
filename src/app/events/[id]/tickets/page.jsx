@@ -4,7 +4,8 @@ import React, { useState } from "react";
 import Image from "next/image";
 import { notFound, useRouter } from "next/navigation";
 import Link from "next/link";
-import { useCart } from "../../../../context/CartContext";
+import { useCart } from "@/context/CartContext";
+
 
 // All events with details
 const EVENTS = [
@@ -85,7 +86,7 @@ const EVENTS = [
 	},
 ];
 
-// Ticket options
+
 const TICKETS = [
 	{ type: "Standard", price: 1000, soldOut: false },
 	{ type: "VIP", price: 25000, soldOut: false },
@@ -110,7 +111,7 @@ function TicketOptions({ tickets, event }) {
     e.preventDefault();
     const today = new Date();
     if (new Date(event.date) < today) {
-      setShowEndedModal(true); // 🚨 Show modal if event ended
+      setShowEndedModal(true); 
       return;
     }
     addToCart({
@@ -127,7 +128,7 @@ function TicketOptions({ tickets, event }) {
 
   return (
     <>
-      {/* Ticket Options */}
+     
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-6">
         {tickets.map((ticket) => (
           <div
@@ -171,7 +172,7 @@ function TicketOptions({ tickets, event }) {
         ))}
       </div>
 
-      {/* Ended Event Modal */}
+     
       {showEndedModal && (
         <div className="fixed inset-0 flex items-center justify-center bg-black/70 z-50">
           <div className="bg-white text-black rounded-2xl shadow-xl max-w-sm w-full p-6">
@@ -309,17 +310,16 @@ function NewsletterSignup() {
 }
 
 export default function TicketsPage({ params }) {
-  const unwrappedParams = React.use(params); // ✅ unwraps promise
+  const unwrappedParams = React.use(params); 
   const { id } = unwrappedParams;
 	const event = EVENTS.find((e) => e.id === id);
 	if (!event) return notFound();
 
-	// Exclude current event from "More Events"
 	const moreEvents = EVENTS.filter((e) => e.id !== id);
 
 	return (
 		<main className="bg-black text-white min-h-screen pb-20">
-			{/* Hero */}
+		
 			<div className="relative w-full h-[400px] md:h-[520px]">
 				<Image
 					src={event.image}
@@ -339,35 +339,33 @@ export default function TicketsPage({ params }) {
 				</div>
 			</div>
 
-			{/* Description */}
+			
 			<section className="max-w-3xl mx-auto p-6 mt-8">
 				<p className="text-lg text-gray-200 italic text-center">
 					{event.description}
 				</p>
 			</section>
 
-			{/* Tickets */}
 			<section className="max-w-3xl mx-auto p-6">
 				<h2 className="text-2xl font-bold mb-2 text-purple-400">Tickets</h2>
 				<TicketOptions tickets={TICKETS} event={event} />
 			</section>
 
-			{/* Info Block */}
+			
 			<section className="max-w-3xl mx-auto p-6">
 				<EventInfo event={event} />
 			</section>
 
-			{/* Gallery */}
+			
 			<section className="max-w-3xl mx-auto p-6">
 				<Gallery images={event.gallery} />
 			</section>
 
-			{/* More Events */}
+			
 			<section className="max-w-3xl mx-auto p-6">
 				<MoreEvents events={moreEvents} />
 			</section>
 
-			{/* Newsletter Signup */}
 			<section className="max-w-3xl mx-auto p-6">
 				<NewsletterSignup />
 			</section>

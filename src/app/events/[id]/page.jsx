@@ -7,7 +7,7 @@ import TableSelector from "./TableSelector.client";
 import Gallery from "./gallery.client.jsx";
 import MoreEvents from "./MoreEvents.client";
 import { notFound } from "next/navigation";
-import { useCart } from "../../context/CartContext";
+import { useCart } from "@/context/CartContext";
 import { useRouter } from "next/navigation";
 
 // All events with details and Naira pricing
@@ -151,7 +151,7 @@ export default function Page({ params }) {
       pricePerTicket,
       total: totalPrice,
     });
-    router.push("/cart"); // Redirect to cart page after adding
+    router.push("/cart"); 
   };
 
   const handleBuyNow = (e) => {
@@ -170,7 +170,7 @@ export default function Page({ params }) {
 
   return (
     <main className="bg-black text-white min-h-screen">
-      {/* Header / Hero */}
+     
       <div className="relative w-full h-[420px] md:h-[520px]">
         <Image
           src={event.image}
@@ -191,10 +191,10 @@ export default function Page({ params }) {
         </div>
       </div>
 
-      {/* Main content: left = details + gallery, right = ticket/table selector */}
+      
       <div className="max-w-7xl mx-auto p-6 grid grid-cols-1 lg:grid-cols-3 gap-8">
         <div className="lg:col-span-2 space-y-8">
-          {/* Ticket summary / highlights */}
+         
           <section className="bg-zinc-900 p-6 rounded-xl">
             <h2 className="text-2xl font-bold">Event Details</h2>
             <ul className="mt-4 space-y-2 text-gray-300">
@@ -208,10 +208,9 @@ export default function Page({ params }) {
             </ul>
           </section>
 
-          {/* Media */}
+         
           <Gallery gallery={event.gallery} video={event.video} />
 
-          {/* Description / long copy */}
           <section className="bg-zinc-900 p-6 rounded-xl">
             <h3 className="text-xl font-semibold">About this event</h3>
             <p className="mt-3 text-gray-300">
@@ -219,13 +218,12 @@ export default function Page({ params }) {
             </p>
           </section>
 
-          {/* More events */}
           <MoreEvents events={EVENTS.filter((e) => e.id !== id)} />
         </div>
 
-        {/* Right column: booking box */}
+       
         <aside className="space-y-6">
-          {/* Add to Cart Section */}
+         
           <div className="bg-zinc-900 p-6 rounded-xl">
             <h3 className="text-xl font-bold mb-2">Add to Cart</h3>
             <form onSubmit={handleAddToCart} className="flex flex-col gap-4">

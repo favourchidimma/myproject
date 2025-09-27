@@ -2,7 +2,7 @@
 import React, { useState } from 'react';
 import Image from 'next/image';
 import { SiListmonk } from "react-icons/si";
-
+import Form from './form';
 const facilities = [
   {
     title: "Luxury Lounge",
@@ -216,44 +216,7 @@ const About = () => {
             </ul>
           </div>
         </section>
-        <div 
-          className="relative bg-cover bg-center w-auto h-60 mt-20 flex flex-col justify-center items-center text-center px-4 sm:px-6"
-          style={{ backgroundImage: "url('/image3.jpg')" }}
-        >
-          <p className="text-white font-bold text-2xl sm:text-3xl md:text-5xl max-w-xl">
-            Never miss a show of your favorite artist
-          </p>
-          <form
-  action="https://formsubmit.co/fave12fave@gmail.com"
-  method="POST"
-  className="bg-white text-red-900 w-full max-w-lg flex flex-col sm:flex-row items-center mt-6 p-3 rounded-2xl shadow-lg gap-3 sm:gap-0"
->
-  <input
-    type="email"
-    name="email"
-    placeholder="Email Address"
-    required
-    className="flex-1 px-4 py-2 border-none outline-none text-gray-700 w-full"
-  />
-
-  {/* Hidden fields for extra config */}
-  <input type="hidden" name="_captcha" value="false" />
-  <input type="hidden" name="_subject" value="New Newsletter Subscriber!" />
-  <input
-    type="hidden"
-    name="_next"
-    value="https://yourdomain.com/thank-you"
-  />
-
-  <button
-    type="submit"
-    className="bg-purple-600 text-white px-5 py-2 rounded-lg w-full sm:w-auto hover:bg-purple-700 transition cursor-pointer"
-  >
-    Subscribe
-  </button>
-</form>
-
-        </div>
+        <Form />
       </div>
     </div>
   );

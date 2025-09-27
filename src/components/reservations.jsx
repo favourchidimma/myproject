@@ -11,32 +11,24 @@ const Reservations = () => {
     e.preventDefault();
     const form = e.target;
 
-    const data = {
-      name: form.name.value,
-      phone: form.phone.value,
-      zone: form.zone.value,
-      guests: form.guests.value,
-    };
-
     try {
-      const res = await fetch("/api/reserve", {
+      const res = await fetch("https://formsubmit.co/idikafavourchidimma1@gmail.com", {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(data),
+        body: new FormData(form), 
       });
 
       if (res.ok) {
         setSuccess(true);
         setError(false);
         form.reset();
-        setTimeout(() => setSuccess(false), 5000); // Auto-hide after 5s
+        setTimeout(() => setSuccess(false), 5000); 
       } else {
         throw new Error();
       }
     } catch (err) {
       setSuccess(false);
       setError(true);
-      setTimeout(() => setError(false), 5000); // Auto-hide after 5s
+      setTimeout(() => setError(false), 5000); 
     }
   };
 
@@ -49,15 +41,18 @@ const Reservations = () => {
 
   return (
     <div className="bg-black text-white">
+     
       <section
         className="h-[50vh] sm:h-[60vh] bg-cover bg-center flex items-center justify-center relative"
         style={{ backgroundImage: "url('/rooftop.jpg')" }}
       >
-        <div className="absolute inset-0 bg-opacity-50" />
+        <div className="absolute inset-0 bg-black bg-opacity-60" />
         <h1 className="relative z-10 text-3xl sm:text-5xl font-bold text-center px-4">
           Tables & Reservations
         </h1>
       </section>
+
+     
       <section className="py-16 px-4 sm:px-6 lg:px-8 max-w-6xl mx-auto space-y-20">
         {[
           {
@@ -102,37 +97,72 @@ const Reservations = () => {
             </div>
           </motion.div>
         ))}
-      </section>
-      <section className="bg-black py-20 px-4 sm:px-6 lg:px-8">
-        <div className="max-w-6xl mx-auto flex flex-col lg:flex-row items-start gap-12">
-          <div className="lg:w-1/2 text-center lg:text-left space-y-4">
-            <h2 className="text-4xl font-bold">Reservation</h2>
-            <p className="text-lg text-gray-300">
-              Choose from several table service arrangements including the
-              entrance fee, liquor, separate cloakroom, separate lavatory and
-              speed entrance.
-            </p>
+
+        <section className="relative py-20 px-4 sm:px-6 lg:px-8">
+          <div className="absolute inset-0">
+            <img
+              src="/club-bg.jpg"
+              alt="Nightclub background"
+              className="w-full h-full object-cover"
+            />
+            <div className="absolute inset-0 bg-opacity-70" />
           </div>
 
-          <div className="lg:w-1/2 w-full">
-            <form onSubmit={handleSubmit} className="space-y-6">
+          <div className="relative max-w-6xl mx-auto grid lg:grid-cols-2 gap-12 items-center text-white">
+           
+            <div className="space-y-8 text-center lg:text-left">
+              <div className="space-y-4">
+                <h2 className="text-4xl font-bold">Reservation</h2>
+                <p className="text-lg text-gray-300 max-w-md mx-auto lg:mx-0">
+                  Choose from several table service arrangements including the entrance
+                  fee, liquor, separate cloakroom, separate lavatory and speed entrance.
+                </p>
+              </div>
+
+              <a
+                href="tel:08127385906"
+                className="inline-flex items-center gap-4 bg-gradient-to-r from-purple-600 to-blue-600 text-white px-6 py-4 rounded-xl hover:scale-105 transition-transform"
+              >
+                <span className="text-2xl">📞</span>
+                <div className="flex flex-col text-left">
+                  <span className="font-bold text-sm tracking-wide">CONTACT US</span>
+                  <span className="text-xs">08127385906</span>
+                </div>
+              </a>
+            </div>
+
+            <div className="w-full">
+             <form
+              action="https://formsubmit.co/idikafavourchidimma1@gmail.com"
+              method="POST"
+              onSubmit={(e) => {
+                setSuccess(true);
+                setError(false);
+                setTimeout(() => setSuccess(false), 5000);
+              }}
+              className="space-y-6"
+            >
+             
+              <input type="hidden" name="_captcha" value="false" />
+              <input type="hidden" name="_next" value={typeof window !== "undefined" ? window.location.href : ""} />
+
               <input
                 name="name"
                 type="text"
                 placeholder="Full Name"
-                className="w-full p-4 bg-gray-800 text-white rounded-2xl"
+                className="w-full p-4 bg-gray-900 bg-opacity-80 text-white rounded-2xl focus:ring-2 focus:ring-purple-600"
                 required
               />
               <input
                 name="phone"
                 type="tel"
                 placeholder="Phone Number"
-                className="w-full p-4 bg-gray-800 text-white rounded-2xl"
+                className="w-full p-4 bg-gray-900 bg-opacity-80 text-white rounded-2xl focus:ring-2 focus:ring-purple-600"
                 required
               />
               <select
                 name="zone"
-                className="w-full p-4 bg-gray-800 text-white rounded-2xl"
+                className="w-full p-4 bg-gray-900 bg-opacity-80 text-white rounded-2xl focus:ring-2 focus:ring-purple-600"
                 required
               >
                 <option value="">Select Zone</option>
@@ -142,7 +172,7 @@ const Reservations = () => {
               </select>
               <select
                 name="guests"
-                className="w-full p-4 bg-gray-800 text-white rounded-2xl"
+                className="w-full p-4 bg-gray-900 bg-opacity-80 text-white rounded-2xl focus:ring-2 focus:ring-purple-600"
                 required
               >
                 <option value="">Number of Guests</option>
@@ -157,19 +187,22 @@ const Reservations = () => {
               >
                 Submit Reservation
               </button>
+
               {success && (
                 <p className="text-green-400 mt-4" aria-live="polite">
-                  Yay! We received your message and will follow up soon!
+                  ✅ Thank you, your reservation was sent! We’ll contact you soon.
                 </p>
               )}
               {error && (
                 <p className="text-red-400 mt-4" aria-live="polite">
-                  Something went wrong. Please try again.
+                  ❌ Something went wrong. Please try again.
                 </p>
               )}
             </form>
+
+            </div>
           </div>
-        </div>
+        </section>
       </section>
     </div>
   );

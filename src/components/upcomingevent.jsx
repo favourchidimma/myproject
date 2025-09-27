@@ -3,6 +3,7 @@ import React, { useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import dayjs from 'dayjs';
+import Form from './form';
 
 
 const events = [
@@ -47,14 +48,14 @@ const EventCard = ({ event }) => (
 );
 
 const Upcomingevent = () => {
-  // const [showCart, setShowCart] = useState(false);
+  
   const today = dayjs().startOf('day');
   const upcomingEvents = events.filter(event => dayjs(event.date).isAfter(today));
   const pastEvents = events.filter(event => dayjs(event.date).isBefore(today));
 
   return (
     <div className="bg-black text-white py-10 px-6">
-      {/* Header Section */}
+      
       <div
         className="relative w-full h-64 bg-cover bg-center flex justify-center items-center"
         style={{ backgroundImage: "url('/city.jpg')" }}
@@ -63,7 +64,7 @@ const Upcomingevent = () => {
         <h1 className="relative z-10 text-4xl font-bold text-center">EVENTS CALENDAR</h1>
       </div>
 
-      {/* Past Events */}
+      
       <section className="mt-14 max-w-7xl mx-auto">
         <h2 className="text-3xl font-bold text-purple-500 text-center mb-6">Past Events</h2>
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10">
@@ -73,7 +74,7 @@ const Upcomingevent = () => {
         </div>
       </section>
 
-      {/* Upcoming Events */}
+      
       <section className="mt-16 max-w-7xl mx-auto">
         <h2 className="text-3xl font-bold text-purple-500 text-center mb-6">Upcoming Events</h2>
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10">
@@ -83,42 +84,7 @@ const Upcomingevent = () => {
         </div>
       </section>
 
-      {/* Subscription Section */}
-     <section
-  className="relative bg-cover bg-center w-full h-60 mt-20 flex flex-col justify-center items-center text-center"
-  style={{ backgroundImage: "url('/city.jpg')" }}
->
-  <div className="bg-opacity-70 w-full h-full absolute top-0 left-0 z-0" />
-  <div className="relative z-10 max-w-2xl mx-auto flex flex-col items-center">
-    <p className="text-white font-bold text-2xl sm:text-3xl md:text-5xl mb-4">
-      Never miss a show of your favorite artist
-    </p>
-    <form
-      className="bg-white text-gray-900 w-full max-w-lg flex flex-col sm:flex-row justify-center items-center mt-2 p-3 rounded-2xl shadow-lg gap-3"
-      onSubmit={e => {
-        e.preventDefault();
-        // Add your submission logic here
-      }}
-    >
-      <input
-        type="email"
-        required
-        placeholder="Enter your email"
-        className="flex-1 px-4 py-2 rounded-lg border-none outline-none text-gray-700 w-full"
-        aria-label="Email address"
-      />
-      <button
-        type="submit"
-        className="bg-purple-600 text-white px-5 py-2 rounded-lg w-full sm:w-auto hover:bg-purple-700 transition font-semibold"
-      >
-        Subscribe
-      </button>
-    </form>
-    <p className="text-white text-sm mt-4">
-      Get notifications delivered to your email weekly.
-    </p>
-  </div>
-</section>
+    <Form/>
     </div>
   );
 };
