@@ -25,7 +25,7 @@ export default function CartPage() {
       <div className="bg-black rounded-2xl shadow-2xl w-full max-w-lg flex flex-col p-6">
      
         <div className="flex items-center justify-between mb-4 border-b pb-3">
-          <h2 className="text-xl font-bold text-gray-900">YOUR CART</h2>
+          <h2 className="text-xl font-bold text-white">YOUR CART</h2>
           <Link href="/events" className="text-gray-500 hover:text-red-500 text-2xl">
             ×
           </Link>
@@ -57,10 +57,10 @@ export default function CartPage() {
 
                
                 <div className="flex-1">
-                  <div className="font-semibold text-gray-900">
+                  <div className="font-semibold text-white">
                     {item.eventTitle || "Event Ticket"}
                   </div>
-                  <div className="text-xs text-gray-500 capitalize">
+                  <div className="text-xs text-white capitalize">
                     {item.ticketType || "General"} Package
                   </div>
                   <div className="text-sm text-purple-700 font-bold mt-1">
@@ -111,7 +111,7 @@ export default function CartPage() {
         {cart.length > 0 && (
           <div className="border-t pt-4">
             <div className="flex justify-between items-center mb-4">
-              <span className="text-gray-700 font-semibold">Subtotal</span>
+              <span className="text-white font-semibold">Subtotal</span>
               <span className="text-lg font-bold text-purple-700">
                 ₦{subtotal.toLocaleString()}
               </span>
