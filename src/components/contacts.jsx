@@ -121,7 +121,7 @@ export default function ContactForm() {
               <p className="pb-0.5">Call Us</p>
               <a
                 href="tel:+2348127385906"
-                className="text-yellow-400 hover:underline"
+                className="text-white hover:underline"
               >
                 08127385906
               </a>
