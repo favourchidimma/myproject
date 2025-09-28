@@ -1,25 +1,33 @@
 "use client";
 
 import { useCart } from "@/context/CartContext";
-import PaystackPop from "@paystack/inline-js";
 import { useRouter } from "next/navigation";
+import { useState } from "react";
 
 export default function PaymentPage() {
   const { cart, clearCart } = useCart();
   const router = useRouter();
+  const [PaystackPop, setPaystackPop] = useState(null);
 
   const total = cart.reduce(
     (sum, item) => sum + item.price * (item.quantity || 1),
     0
   );
 
-  const handlePayment = () => {
-    const paystack = new PaystackPop();
+  const handlePayment = async () => {
+    // dynamically import Paystack only when needed
+    if (!PaystackPop) {
+      const module = await import("@paystack/inline-js");
+      setPaystackPop(() => module.default);
+    }
+
+    const paystack = new (PaystackPop || (await import("@paystack/inline-js")).default)();
+
     paystack.newTransaction({
       key: "pk_test_your_public_key", // replace with your Paystack public key
       amount: total * 100, // Paystack uses kobo
       email: "customer@email.com", // ideally get from user
-      onSuccess: (transaction) => {
+      onSuccess: () => {
         clearCart();
         router.push("/checkout/success");
       },
