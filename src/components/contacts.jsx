@@ -62,7 +62,6 @@ export default function ContactForm() {
       if (response.ok) {
         setSubmitted(true);
 
-       
         setFormInfo({
           firstName: "",
           lastName: "",
@@ -88,7 +87,6 @@ export default function ContactForm() {
   return (
     <div className="w-full bg-[#0d0d0d] text-white py-20 px-6">
       <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-start gap-10">
-        
        
         <div className="flex flex-col items-start gap-7 w-full md:w-1/3">
           <div className="flex items-center gap-2">
@@ -100,6 +98,7 @@ export default function ContactForm() {
             Hit us up and Let’s get cracking!
           </p>
 
+      
           <div className="flex gap-4">
             <div className="w-[60px] h-[50px] bg-yellow-600 flex items-center justify-center rounded-md">
               <Mail className="text-black" />
@@ -110,14 +109,22 @@ export default function ContactForm() {
             </div>
           </div>
 
-          
+        
           <div className="flex gap-4">
-            <div className="w-[60px] h-[50px] bg-yellow-600 flex items-center justify-center rounded-md">
+            <a
+              href="tel:+2348127385906"
+              className="w-[60px] h-[50px] bg-yellow-600 flex items-center justify-center rounded-md"
+            >
               <Phone className="text-black" />
-            </div>
+            </a>
             <div className="flex-col text-start">
               <p className="pb-0.5">Call Us</p>
-              <span>08127385906</span>
+              <a
+                href="tel:+2348127385906"
+                className="text-yellow-400 hover:underline"
+              >
+                08127385906
+              </a>
             </div>
           </div>
 
@@ -193,7 +200,6 @@ export default function ContactForm() {
             </button>
           </form>
 
-          
           {submitted && (
             <div className="mt-8 w-full p-6 bg-gradient-to-r from-green-600 to-green-800 rounded-xl flex items-center gap-4 text-white animate-fadeIn">
               <CheckCircle className="w-10 h-10 text-white" />
