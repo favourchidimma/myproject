@@ -2,31 +2,33 @@
 
 import { useCart } from "@/context/CartContext";
 import { useRouter } from "next/navigation";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 export default function PaymentPage() {
   const { cart, clearCart } = useCart();
   const router = useRouter();
   const [PaystackPop, setPaystackPop] = useState(null);
 
+  useEffect(() => {
+    // only runs on the client, safe to import
+    import("@paystack/inline-js").then((mod) => {
+      setPaystackPop(() => mod.default);
+    });
+  }, []);
+
   const total = cart.reduce(
     (sum, item) => sum + item.price * (item.quantity || 1),
     0
   );
 
-  const handlePayment = async () => {
-    // dynamically import Paystack only when needed
-    if (!PaystackPop) {
-      const module = await import("@paystack/inline-js");
-      setPaystackPop(() => module.default);
-    }
+  const handlePayment = () => {
+    if (!PaystackPop) return; // prevent errors before library loads
 
-    const paystack = new (PaystackPop || (await import("@paystack/inline-js")).default)();
-
+    const paystack = new PaystackPop();
     paystack.newTransaction({
-      key: "pk_test_your_public_key", // replace with your Paystack public key
-      amount: total * 100, // Paystack uses kobo
-      email: "customer@email.com", // ideally get from user
+      key: process.env.NEXT_PUBLIC_PAYSTACK_KEY || "pk_test_your_public_key",
+      amount: total * 100,
+      email: "customer@email.com",
       onSuccess: () => {
         clearCart();
         router.push("/checkout/success");
@@ -47,9 +49,10 @@ export default function PaymentPage() {
         </p>
         <button
           onClick={handlePayment}
+          disabled={!PaystackPop}
           className="w-full bg-purple-600 hover:bg-purple-700 py-4 rounded-xl font-semibold text-lg"
         >
-          Pay Now
+          {PaystackPop ? "Pay Now" : "Loading..."}
         </button>
       </div>
     </div>
