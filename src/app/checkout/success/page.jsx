@@ -1,27 +1,23 @@
 "use client";
 
-import { useRouter } from "next/navigation";
-import { CheckCircle } from "lucide-react";
+import Link from "next/link";
 
 export default function SuccessPage() {
-  const router = useRouter();
-
   return (
-    <div className="min-h-screen bg-black flex items-center justify-center p-6">
-      <div className="max-w-md w-full bg-zinc-900 rounded-2xl p-8 shadow-lg text-center text-white">
-        <CheckCircle className="w-16 h-16 text-green-500 mx-auto mb-4" />
-        <h1 className="text-2xl font-bold mb-2">Payment Successful 🎉</h1>
-        <p className="text-gray-400 mb-6">
-          Thank you for your purchase. Your order has been confirmed and a
-          receipt has been sent to your email.
+    <div className="min-h-screen bg-black text-white flex items-center justify-center p-6">
+      <div className="max-w-md w-full bg-gray-900 rounded-2xl shadow-xl p-6 text-center">
+        <h1 className="text-3xl font-bold mb-4 text-green-400">
+          Payment Successful 🎉
+        </h1>
+        <p className="mb-6 text-gray-300">
+          Your ticket(s) have been booked. A confirmation email will be sent.
         </p>
-
-        <button
-          onClick={() => router.push("/events")}
-          className="w-full py-3 rounded-xl bg-gradient-to-r from-purple-600 to-blue-500 font-semibold"
+        <Link
+          href="/events"
+          className="inline-block bg-purple-600 hover:bg-purple-700 py-3 px-6 rounded-xl font-semibold"
         >
           Back to Events
-        </button>
+        </Link>
       </div>
     </div>
   );
