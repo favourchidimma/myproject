@@ -106,7 +106,7 @@ export default function ContactForm() {
             </div>
             <div className="flex-col text-start">
               <p className="pb-0.5">Email Address</p>
-              <p>events@ballazz.co</p>
+              <p>✉ info@nightlifebrand.com</p>
             </div>
           </div>
 
@@ -117,7 +117,7 @@ export default function ContactForm() {
             </div>
             <div className="flex-col text-start">
               <p className="pb-0.5">Call Us</p>
-              <p>+91 9112211492</p>
+              <span>08127385906</span>
             </div>
           </div>
 

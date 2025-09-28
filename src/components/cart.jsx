@@ -22,8 +22,8 @@ export default function CartPage() {
 
   return (
     <main className="min-h-screen bg-black flex justify-center items-center px-4 py-8">
-      <div className="bg-white rounded-2xl shadow-2xl w-full max-w-lg flex flex-col p-6">
-        {/* Header */}
+      <div className="bg-black rounded-2xl shadow-2xl w-full max-w-lg flex flex-col p-6">
+     
         <div className="flex items-center justify-between mb-4 border-b pb-3">
           <h2 className="text-xl font-bold text-gray-900">YOUR CART</h2>
           <Link href="/events" className="text-gray-500 hover:text-red-500 text-2xl">

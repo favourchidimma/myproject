@@ -16,7 +16,7 @@ export default function PaymentPage() {
 
   const [PaystackPop, setPaystackPop] = useState(null);
 
-  // Dynamically import Paystack only in the browser
+  
   useEffect(() => {
     import("@paystack/inline-js").then((mod) => {
       setPaystackPop(() => mod.default);
