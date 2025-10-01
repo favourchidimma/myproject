@@ -11,10 +11,10 @@ const events = [
   { id: 2, src: '/comdeyimg.jpg', alt: 'Comedy Show', date: '2025-12-25' },
   { id: 3, src: '/movienight.jpg', alt: 'Movienight', date: '2025-12-10' },
   { id: 4, src: '/karaoke.jpg', alt: 'Karaoke', date: '2025-12-28' },
-  { id: 5, src: '/games.jpg', alt: 'Games', date: '2025-09-28' },
+  { id: 5, src: '/games.jpg', alt: 'Games', date: '2025-01-28' },
   { id: 6, src: '/Tetradrum.jpg', alt: 'Tetra Drum Show', date: '2025-12-28' },
   { id: 7, src: '/groove.jpg', alt: 'Groove Night SHOW', date: '2025-12-28' },
-  { id: 8, src: '/dancefloor.jpg', alt: 'Dance Floor', date: '2025-06-28' },
+  { id: 8, src: '/dancefloor.jpg', alt: 'Dance Floor', date: '2025-12-28' },
 ];
 
 const EventCard = ({ event }) => (

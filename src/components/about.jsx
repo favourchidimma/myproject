@@ -12,12 +12,12 @@ const facilities = [
   {
     title: "Private VIP Booths",
     description: "Experience exclusivity with personalized service and privacy in our VIP areas.",
-    image: "/lounge 3.jpg",
+    image: "/Lounge 3.jpg",
   },
   {
     title: "Signature Bar",
     description: "Enjoy handcrafted cocktails, premium spirits, and curated drink menus by top mixologists.",
-    image: "/lounge4.jpg",
+    image: "/Lounge4.jpg",
   },
   {
     title: "Dance Floor",
